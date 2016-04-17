@@ -1,0 +1,64 @@
+﻿<div class="row" ng-controller="cardsCtrl">
+    <div class="col-md-3">
+        <ul class="list-group size">
+            <li class="list-group-item" ng-repeat="card in cards" ng-click="selectCard($index)">
+                <h4>
+                    {{card.name}}                    
+                </h4>
+                <p class="text-right">
+                    &nbsp;{{card.card_type}}
+                </p>
+                <div ng-if="card.failed" class="alert alert-danger">No card was found !!!!</div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9" ng-if="selectedCard.failed != true && selectedCard.loaded == true ">
+        <div class="row">
+            <h1 class="text-center">{{selectedCard.name}}</h1>
+            <div class="col-md-3">
+                <a ng-href="{{selectedCard.image}}" target="_blank" title="selectedCard.name"><img ng-src="{{selectedCard.image}}" style="display: block;" /></a>
+            </div>
+            <div class="col-md-9">
+                <p>
+                    <h2>Description</h2>
+                    {{selectedCard.text}}
+                </p>
+                <p>
+                    <h2>Details</h2>
+                    <ul>
+                        <li>Card Type: <b>{{selectedCard.card_type}}</b></li>
+                        <li ng-if="selectedCard.type != null">Type: <b>{{selectedCard.type}}</b></li>
+                        <li ng-if="selectedCard.family != null">Family: <b>{{selectedCard.family}}</b></li>
+                        <li ng-if="selectedCard.atk != null">Attack: <b>{{selectedCard.atk}}</b></li>
+                        <li ng-if="selectedCard.def != null">Deffence: <b>{{selectedCard.def}}</b></li>
+                        <li ng-if="selectedCard.level != null">Level: <b>{{selectedCard.level}}</b></li>
+                        <li ng-if="selectedCard.property != null">Property: <b>{{selectedCard.property}}</b></li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <br />
+        <div class="row" ng-if="selectedCard.cardPrices != null">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li ng-repeat="(key, item) in selectedCard.cardPrices" ng-class="$index == 0 ? 'active' : ''">
+                        <a href="#{{key}}" data-toggle="tab"><b>{{item.name}}</b></a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div ng-repeat="(key, item) in selectedCard.cardPrices" id="{{key}}" class="tab-pane fade {{$index == 0 ? 'in active' : ''}}">
+                        <h3>{{item.name}}</h3>
+                        Rarity: <b>{{item.rarity}}</b>
+                        <ul>
+                            <li ng-repeat="(key, value) in item.price_data.data.prices">
+                                {{key}}: <b>{{value}}</b>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>    
+</div>

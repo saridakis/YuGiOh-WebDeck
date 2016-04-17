@@ -1,0 +1,16 @@
+﻿html, body {
+}
+
+div.body img {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
+ul.list-group.size {    
+    overflow-y: scroll;
+}
+
+ul.list-group li:hover {
+    cursor: pointer;
+    color: darkkhaki;
+}
